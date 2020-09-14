@@ -1,0 +1,6 @@
+{
+    "editor.fontSize": 17,
+    "editor.formatOnSave": true,
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 500
+}
