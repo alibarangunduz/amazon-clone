@@ -12,6 +12,7 @@ function Login() {
     e.preventDefault();
     //some firebase login
   };
+    
 
   const register = (e) => {
     e.preventDefault();
