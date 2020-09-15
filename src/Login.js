@@ -71,7 +71,7 @@ function Login() {
 
         <p>
           By signing-in you agree to the AMAZON FAJE CLONE Conditions of Use &
-          Sale. Please see our Privacy Notice, our Cookies Notice and out !!
+          Sale. Please see our Privacy Notice, our Cookies Notice and our interest-Based Ads Notice.
         </p>
         <button className="login__registerButton" onClick={register}>
           Create your Amazon Account
