@@ -1,29 +1,51 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { auth } from "./firebase";
-
 import "./Login.css";
+//import { auth } from "./firebase";
+import axios from 'axios';
+const api = axios.create({
+  baseURL: `http://localhost:52851/api/Auth`
+});
+
 
 function Login() {
   const history = useHistory()
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-
+  
   const signIn = (e) => {
     e.preventDefault();
+    
+    api.post(`/LoginUser`, {userName: email, password: password}).then(res => {
+      console.log(res.data)
+      
+      if(res.data.isSuccess) 
+      history.push("/");
+    });
+    
+
     //some firebase login
-    auth
+    /*auth
       .signInWithEmailAndPassword(email, password)
       .then((auth) => {
         history.push("/");
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => alert(error.message));*/
   };
 
   const register = (e) => {
     e.preventDefault();
-    // do some firebase register
-    auth
+    api.post(`/CreateUser`, {userName: email, name: name, password: password}).then(res => {
+      console.log(res.data)
+      if(res.data.isSuccess) {
+        history.push("/");
+      }  
+    });
+    
+  
+    
+    /*auth
       .createUserWithEmailAndPassword(email, password)
       .then((auth) => {
         //it successfully created a new user with email and password
@@ -31,7 +53,7 @@ function Login() {
           history.push('/');
         }
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => alert(error.message));*/
   };
 
   return (
@@ -53,6 +75,13 @@ function Login() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
+          <h5>name</h5>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+
           <h5>Password</h5>
           <input
             type="password"
